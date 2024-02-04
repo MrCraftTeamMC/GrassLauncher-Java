@@ -1,0 +1,77 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+    id 'de.undercouch.download' version '5.4.0' apply false
+}
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "maven-publish"
+
+    group = rootProject.maven_group
+    version = rootProject.release_version
+    base.archivesName = rootProject.archives_base_name
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile) {
+        // ensure that the encoding is set to UTF-8, no matter what the system default is
+        // this fixes some edge cases with special characters not displaying correctly // see [http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html](http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html)
+        // If Javadoc is generated, this must be specified in that task too.
+        options.encoding = "UTF-8"
+        options.release = 8
+    }
+
+    tasks.withType(Javadoc) {
+        options.encoding = 'UTF-8'
+    }
+
+    tasks.withType(Test) {
+        systemProperty "file.encoding", "UTF-8"
+    }
+
+    java {
+        withSourcesJar()
+        withJavadocJar()
+    }
+
+    publishing {
+        publications {
+            MrCraftTeamMCMaven(MavenPublication) {
+//                artifaceId = rootProject.archives_base_name + "-" + project.name
+                from components.java
+            }
+        }
+
+        repositories {
+            maven {
+
+            }
+        }
+    }
+}
+
+subprojects {
+    apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "de.undercouch.download"
+
+    configurations {
+    }
+
+    dependencies {
+        // Tests
+        testImplementation platform('org.junit:junit-bom:5.9.1')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}

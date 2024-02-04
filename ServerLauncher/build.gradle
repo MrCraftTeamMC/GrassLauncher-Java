@@ -1,0 +1,15 @@
+dependencies {
+    implementation project(":Core")
+}
+
+jar {
+    manifest {
+        attributes "Manifest-Version": "1.0"
+        attributes "Main-Class": "xyz.mrcraftteammc.grasslauncher.server.GrassLauncher"
+        attributes "Implementation-Title": "Gradle"
+    }
+}
+
+shadowJar {
+    archiveClassifier.set "full"
+}

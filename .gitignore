@@ -1,0 +1,56 @@
+# gradle
+
+.gradle/
+build/
+out/
+classes/
+
+# eclipse
+
+*.launch
+
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macos
+
+*.DS_Store
+
+# fabric
+
+run/
+lib/
+logs/
+
+*.class
+
+/.idea/*.xml
+
+*.jar
+!/gradle/wrapper/gradle-wrapper.jar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+.gradle
+
+*.lck
+*.1
+*.2
+*.log
+.mine*
+/externalgames
+NVIDIA
+minecraft-exported-crash-info*

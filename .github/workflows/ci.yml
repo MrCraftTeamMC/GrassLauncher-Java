@@ -1,0 +1,42 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Setup jdk 1.8
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '8'
+
+      - uses: gradle/wrapper-validation-action@v2
+
+      - name: Build with Gradle
+        run: ./gradlew clean test shadowJar --stacktrace --no-daemon
+
+      - name: Get short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      - name: Upload Artifacts (Client Launcher)
+        uses: actions/upload-artifact@v3
+        with:
+          name: GrassLauncher-ClientLauncher-${{ env.SHORT_SHA }}
+          path: ClientLauncher/build/libs/
+
+      - name: Upload Artifacts (Server Launcher)
+        uses: actions/upload-artifact@v3
+        with:
+          name: GrassLauncher-ServerLauncher-${{ env.SHORT_SHA }}
+          path: ServerLauncher/build/libs/
