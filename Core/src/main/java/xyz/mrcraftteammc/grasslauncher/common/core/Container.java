@@ -162,67 +162,6 @@ public interface Container<T> extends Cloneable, Serializable {
     <V> Supplier<V> toSupplier() throws ClassCastException;
 
     /**
-     * Cast the value to {@link String}.
-     * @return A {@link String} of the value.
-     * @throws ClassCastException If the value cannot cast to {@link String}.
-     * @deprecated Please use {@link #to()} instead.
-     * @see SimpleContainer#toStr()
-     * @author Mr_limr267
-     * @since 1.0.0-SNAPSHOT
-     */
-    @Deprecated
-    String toStr() throws ClassCastException;
-
-    /**
-     * Cast the value to {@link UUID}
-     * @return A {@link UUID} of the value.
-     * @throws ClassCastException If the value cannot cast to {@link String}.
-     * @deprecated Please use {@link #to()} instead.
-     * @see SimpleContainer#toUUID()
-     * @see UUID#fromString(String) 
-     * @author Mr_limr267
-     * @since 1.0.0-SNAPSHOT
-     */
-    @Deprecated
-    UUID toUUID() throws ClassCastException;
-
-    /**
-     * Cast the value to {@link Byte}.
-     * @return A {@link Byte} of the value.
-     * @throws ClassCastException If the value cannot cast to {@link Byte}.
-     * @deprecated Please use {@link #to()} instead.
-     * @see SimpleContainer#toByte() 
-     * @see Byte#parseByte(String) 
-     * @author Mr_limr267
-     * @since 1.0.0-SNAPSHOT
-     */
-    @Deprecated
-    byte toByte() throws ClassCastException;
-
-    /**
-     * Cast the value to {@link Byte} with range.
-     * @param range See {@link Byte#parseByte(String, int)}
-     * @return A {@link Byte} of the value.
-     * @throws NumberFormatException See {@link Byte#parseByte(String, int)}.
-     * @see SimpleContainer#toByte(int)
-     * @see Byte#parseByte(String, int)
-     * @author Mr_limr267
-     * @since 1.0.0-SNAPSHOT
-     */
-    byte toByte(int range) throws NumberFormatException;
-
-    /**
-     * Cast a {@link Container} Instance to {@link Object}.
-     * @return An {@link Object} Instance of the value.
-     * @deprecated All the value and the class are based on {@link Object}.
-     * @see SimpleContainer#toObject()
-     * @author Mr_limr267
-     * @since 1.0.0-SNAPSHOT
-     */
-    @Deprecated
-    Object toObject();
-
-    /**
      * Clone of {@link Container} Instance.
      * @return A copy/clone of {@link Container} Instance.
      * @throws CloneNotSupportedException Do you think it is possible to throw this Exception?
@@ -343,35 +282,6 @@ public interface Container<T> extends Cloneable, Serializable {
         @Override
         public <E> Supplier<E> toSupplier() throws ClassCastException {
             return this::to;
-        }
-
-        @Override
-        @Deprecated
-        public String toStr() throws ClassCastException {
-            return (String) this.value;
-        }
-
-        @Override
-        @Deprecated
-        public UUID toUUID() throws ClassCastException  {
-            return UUID.fromString(this.toStr());
-        }
-
-        @Override
-        @Deprecated
-        public byte toByte() throws ClassCastException {
-            return (byte) this.value;
-        }
-
-        @Override
-        public byte toByte(int range) throws NumberFormatException {
-            return Byte.parseByte(this.toStr(), range);
-        }
-
-        @Override
-        @Deprecated
-        public Object toObject() {
-            return (Object) this.value;
         }
 
         @Override
