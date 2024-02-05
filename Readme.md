@@ -39,7 +39,7 @@ rem For Windows
 .\gradlew.bat clean shadowJar --stacktrace --no-daemon
 ```
 
-Then you can find the jar ends with `-full` in `build/libs` dir of project `ClientLauncher` and `Server Launcher`.
+Then you can find the jar ends with `-full` in `build/libs` dir of project `ClientLauncher` and `ServerLauncher`.
 
 ## License
 This project is under [GNU General Public License v3](./LICENSE).
