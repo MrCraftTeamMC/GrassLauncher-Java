@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(":I18n")
+//    implementation project(":I18n")
 }
 
 jar {

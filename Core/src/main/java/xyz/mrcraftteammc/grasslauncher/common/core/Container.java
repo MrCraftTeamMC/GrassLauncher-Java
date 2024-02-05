@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 /**
@@ -27,10 +26,12 @@ public interface Container<T> extends Cloneable, Serializable {
     /**
      * Get empty {@link Container}.
      * @return An empty {@link Container} Instance.
+     * @deprecated
      * @see SimpleContainer#empty()
      * @author Mr_limr267
      * @since 1.0.0-SNAPSHOT
      */
+    @Deprecated
     Container<? extends T> empty();
 
     /**
@@ -206,7 +207,7 @@ public interface Container<T> extends Cloneable, Serializable {
     class SimpleContainer<V>
             implements Container<V> {
         private final V value;
-        private static final Container<?> EMPTY = new SimpleContainer<>(null);
+        public static final Container<?> EMPTY = new SimpleContainer<>(null);
 
         public SimpleContainer(V value) {
             this.value = value;
@@ -217,6 +218,7 @@ public interface Container<T> extends Cloneable, Serializable {
         }
 
         @Override
+        @Deprecated
         public Container<? extends V> empty() {
             return (Container<V>) SimpleContainer.EMPTY;
         }

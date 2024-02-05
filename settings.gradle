@@ -10,7 +10,6 @@ pluginManagement {
 }
 
 include ":Core"
-include ":I18n"
 include ":ClientLauncher"
 include ":ServerLauncher"
 

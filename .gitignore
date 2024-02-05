@@ -33,6 +33,7 @@ bin/
 run/
 lib/
 logs/
+temp/
 
 *.class
 
