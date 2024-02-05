@@ -29,6 +29,13 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean test shadowJar --stacktrace --no-daemon
 
+      - name: Publish Packages with Gradle
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, '[publish]') == true
+        run: ./gradlew publish -x shadowJar --stacktrace --no-daemon
+        env:
+          USERNAME: ${{ secrets.PACKAGE_USER_NAME }}
+          TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+
       - name: Get short SHA
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 

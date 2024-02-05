@@ -1,5 +1,17 @@
-rootProject.name = 'GrassLauncher'
+pluginManagement {
+    repositories {
+        maven {
+            name = "Jitpack"
+            url = "https://jitpack.io"
+        }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
 
 include ":Core"
+include ":I18n"
 include ":ClientLauncher"
 include ":ServerLauncher"
+
+rootProject.name = 'GrassLauncher'
