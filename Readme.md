@@ -1,5 +1,8 @@
 # GrassLauncher
-![]()
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MrCraftTeamMC/GrassLauncher/ci.yml)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/MrCraftTeamMC/GrassLauncher/total)
+![GitHub Release](https://img.shields.io/github/v/release/MrCraftTeamMC/GrassLauncher)
 
 English | [中文](./Readme_cn.md)
 
