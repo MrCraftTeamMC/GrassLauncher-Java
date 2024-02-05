@@ -1,5 +1,4 @@
 dependencies {
-    implementation "commons-io:commons-io:2.15.1"
     implementation "org.yaml:snakeyaml:2.2"
 }
 

@@ -1,9 +1,9 @@
 package xyz.mrcraftteammc.grasslauncher.server;
 
-import static xyz.mrcraftteammc.grasslauncher.common.GrassLauncher.LOGGER;
+import xyz.mrcraftteammc.grasslauncher.common.GrassLauncher;
 
 public class GrassServerLauncher {
     public static void main(String[] args) {
-        LOGGER.info("Hello Server!");
+        GrassLauncher.LOGGER.info("Hello Server!");
     }
 }
