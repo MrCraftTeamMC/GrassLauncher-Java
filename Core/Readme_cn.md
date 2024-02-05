@@ -7,7 +7,7 @@ GrassLauncher 的核心代码部分。
 ## 用法
 你可以 [Maven](https://maven.apache.org) 或 [Gradle](https://gradle.org)。
 
-```maven
+```pom.xml
 <repositories>
     <repository>
         <id>github-packages</id>

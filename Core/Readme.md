@@ -7,7 +7,7 @@ The core part of GrassLauncher.
 ## Usage
 You can use [Maven](https://maven.apache.org) or [Gradle](https://gradle.org).
 
-```maven
+```pom.xml
 <repositories>
     <repository>
         <id>github-packages</id>
