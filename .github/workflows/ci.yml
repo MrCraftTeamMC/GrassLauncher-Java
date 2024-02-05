@@ -33,13 +33,13 @@ jobs:
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Upload Artifacts (Client Launcher)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: GrassLauncher-ClientLauncher-${{ env.SHORT_SHA }}
           path: ClientLauncher/build/libs/
 
       - name: Upload Artifacts (Server Launcher)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: GrassLauncher-ServerLauncher-${{ env.SHORT_SHA }}
           path: ServerLauncher/build/libs/
