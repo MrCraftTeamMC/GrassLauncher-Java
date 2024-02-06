@@ -18,6 +18,6 @@ public class ServerLaunchArgs {
 
     public String mergeArgs() {
         return String.format("%s/bin/java.exe %s -jar %s",
-                this.javaPath, this.jvmArgs, this.jarName) + (this.nogui ? "nogui" : "");
+                this.javaPath, this.jvmArgs, this.jarName) + (this.nogui ? " nogui" : "");
     }
 }

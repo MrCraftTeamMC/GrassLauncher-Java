@@ -50,12 +50,14 @@ public class GrassLauncher {
 //                    480
 //            )));
 
-//            Launch.runServer(new Container.SimpleContainer<>(new ServerLaunchArgs(
-//                    "D:\\java\\zulu8.72.0.17-ca-fx-jre8.0.382-win_x64\\bin\\java.exe",
-//                    "-Xmx1024M",
-//                    "D:\\Github\\GrassLauncher\\run\\server\\server_1.8.9.jar",
-//                    true
-//            )));
+            if (side == Side.SERVER) {
+                Launch.runServer(new Container.SimpleContainer<>(new ServerLaunchArgs(
+                        "D:\\-",
+                        "-Xmx1024M",
+                        "D:\\-",
+                        true
+                )));
+            }
 
 //            GrassLauncherUI.onStartup();
         } catch (Throwable t) {
