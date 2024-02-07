@@ -21,9 +21,10 @@ public class Launch {
     private static final String prefix = " (MC) ";
     private static final boolean WINDOWS = System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("win");
 
-    public static ProcessCallBack runClient(Container<ClientLaunchArgs> args) {
+    public static ProcessCallBack run(Container<? extends LaunchArgs> args) {
         // fix `\\` -> `/`
         String cmd = (WINDOWS ? args.getOrThrow().mergeArgs() : args.getOrThrow().mergeArgs().replaceAll("\\\\", "/"));
+        String side = args.getOrThrow().getSide().getId();
 
         GrassLauncher.LOGGER.info("Launch Args:");
         GrassLauncher.LOGGER.info(cmd);
@@ -46,35 +47,6 @@ public class Launch {
              GrassLauncher.LOGGER.error(e.getLocalizedMessage());
              return new ProcessCallBack(-10000);
          }
-
-//        return new ProcessCallBack(-10000);
-    }
-
-    public static ProcessCallBack runServer(Container<ServerLaunchArgs> args) {
-        // fix `\\` -> `/`
-        String cmd = (WINDOWS ? args.getOrThrow().mergeArgs() : args.getOrThrow().mergeArgs().replaceAll("\\\\", "/"));
-
-        GrassLauncher.LOGGER.info("Launch Args:");
-        GrassLauncher.LOGGER.info(cmd);
-
-        try {
-            Process exec = Runtime.getRuntime().exec(cmd);
-            synchronized (exec) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(exec.getInputStream()));
-
-                String line;
-                while ((line = br.readLine()) != null) {
-                    GrassLauncher.LOGGER.info(getLogs(line));
-                }
-            }
-
-            GrassLauncher.LOGGER.info("Minecraft has been launched!");
-
-            return new ProcessCallBack(exec.exitValue());
-        } catch (NullPointerException | IOException e) {
-            GrassLauncher.LOGGER.error(e.getLocalizedMessage());
-            return new ProcessCallBack(-10000);
-        }
 
 //        return new ProcessCallBack(-10000);
     }

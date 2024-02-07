@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 
 import java.util.concurrent.TimeUnit;
 
+@Deprecated
 public class HTTPNetworkUtil {
     public static final int TIMEOUTS = 3000;
     public static final int connectionPoolSize = 1000;

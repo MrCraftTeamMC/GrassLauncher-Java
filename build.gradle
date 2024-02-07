@@ -87,6 +87,7 @@ subprojects {
         implementation "commons-io:commons-io:2.15.1"
 
         // Tests
+        annotationProcessor(testCompileOnly("org.projectlombok:lombok:1.18.30"))
         testImplementation platform('org.junit:junit-bom:5.10.2')
         testImplementation 'org.junit.jupiter:junit-jupiter'
     }

@@ -1,19 +1,17 @@
 package xyz.mrcraftteammc.grasslauncher.common;
 
-import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import xyz.mrcraftteammc.grasslauncher.common.annotations.NotRunnable;
-import xyz.mrcraftteammc.grasslauncher.common.annotations.TestOnly;
-import xyz.mrcraftteammc.grasslauncher.common.core.Container;
-import xyz.mrcraftteammc.grasslauncher.common.game.Launch;
-import xyz.mrcraftteammc.grasslauncher.common.game.ClientLaunchArgs;
-import xyz.mrcraftteammc.grasslauncher.common.game.ServerLaunchArgs;
-import xyz.mrcraftteammc.grasslauncher.common.ui.GrassLauncherUI;
+import xyz.mrcraftteammc.grasslauncher.common.annotation.NotRunnable;
+import xyz.mrcraftteammc.grasslauncher.common.annotation.TestOnly;
+import xyz.mrcraftteammc.grasslauncher.common.base.Side;
+//import xyz.mrcraftteammc.grasslauncher.common.core.Container;
+//import xyz.mrcraftteammc.grasslauncher.common.game.Launch;
+//import xyz.mrcraftteammc.grasslauncher.common.game.ServerLaunchArgs;
+//import xyz.mrcraftteammc.grasslauncher.common.ui.GrassLauncherUI;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * The Main Class of GrassLauncher
@@ -50,14 +48,14 @@ public class GrassLauncher {
 //                    480
 //            )));
 
-            if (side == Side.SERVER) {
-                Launch.runServer(new Container.SimpleContainer<>(new ServerLaunchArgs(
-                        "D:\\-",
-                        "-Xmx1024M",
-                        "D:\\-",
-                        true
-                )));
-            }
+//            if (side == Side.SERVER) {
+//                Launch.runServer(new Container.SimpleContainer<>(new ServerLaunchArgs(
+//                        "D:\\-",
+//                        "-Xmx1024M",
+//                        "D:\\-",
+//                        true
+//                )));
+//            }
 
 //            GrassLauncherUI.onStartup();
         } catch (Throwable t) {
@@ -92,17 +90,5 @@ public class GrassLauncher {
 //        err.append(t.getCause().getLocalizedMessage()).append("\n");
 
         LOGGER.error(err.toString());
-    }
-
-    @Getter
-    public enum Side {
-        CLIENT("client"),
-        SERVER("server");
-
-        private final String id;
-
-        Side(String id) {
-            this.id = id;
-        }
     }
 }

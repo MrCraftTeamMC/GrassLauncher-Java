@@ -5,7 +5,7 @@ dependencies {
 jar {
     manifest {
         attributes "Manifest-Version": "1.0"
-        attributes "Main-Class": "xyz.mrcraftteammc.grasslauncher.client.GrassClientLauncher"
+        attributes "Main-Class": "xyz.mrcraftteammc.grasslauncher.client.GrassLauncherClientSide"
         attributes "Implementation-Title": "Gradle"
     }
 }

@@ -1,4 +1,4 @@
-package xyz.mrcraftteammc.grasslauncher.common.ui;
+package xyz.mrcraftteammc.grasslauncher.server.ui;
 
 import xyz.mrcraftteammc.grasslauncher.common.GrassLauncher;
 
@@ -12,7 +12,7 @@ import java.awt.*;
  * @see javax.swing
  * @see java.awt
  */
-public class GrassLauncherUI {
+public class ServerLauncherUI {
     public static void placeComponents(JPanel panel) {
         panel.setLayout(null);
 

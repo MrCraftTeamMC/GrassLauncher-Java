@@ -1,7 +1,7 @@
 package xyz.mrcraftteammc.grasslauncher.common.core;
 
 import org.jetbrains.annotations.ApiStatus;
-import xyz.mrcraftteammc.grasslauncher.common.annotations.MustOverride;
+import xyz.mrcraftteammc.grasslauncher.common.annotation.MustOverride;
 
 import java.io.Serializable;
 import java.util.NoSuchElementException;
@@ -23,16 +23,17 @@ public interface Container<T> extends Cloneable, Serializable {
      */
     long serialVersionUID = 1L;
 
-    /**
-     * Get empty {@link Container}.
-     * @return An empty {@link Container} Instance.
-     * @deprecated
-     * @see SimpleContainer#empty()
-     * @author Mr_limr267
-     * @since 1.0.0-SNAPSHOT
-     */
-    @Deprecated
-    Container<? extends T> empty();
+    static <E> Container<E> of(E value) {
+        return new SimpleContainer<>(value);
+    }
+
+    static <E> Container<E> ofNotNull(E value) {
+        return new SimpleContainer<>(Objects.requireNonNull(value));
+    }
+
+    static <E> Container<E> empty() {
+        return (Container<E>) SimpleContainer.EMPTY;
+    }
 
     /**
      * Check if the value is not {@code null}.
@@ -209,18 +210,8 @@ public interface Container<T> extends Cloneable, Serializable {
         private final V value;
         public static final Container<?> EMPTY = new SimpleContainer<>(null);
 
-        public SimpleContainer(V value) {
+        private SimpleContainer(V value) {
             this.value = value;
-        }
-
-        public SimpleContainer(V value, boolean nullable) {
-            this(nullable ? value : Objects.requireNonNull(value));
-        }
-
-        @Override
-        @Deprecated
-        public Container<? extends V> empty() {
-            return (Container<V>) SimpleContainer.EMPTY;
         }
 
         @Override
@@ -322,11 +313,6 @@ public interface Container<T> extends Cloneable, Serializable {
             this.value = super.get();
         }
 
-        public ComparableContainer(V value, boolean nullable) {
-            super(value, nullable);
-            this.value = super.get();
-        }
-
         @Override
         public Object clone() throws CloneNotSupportedException {
             return super.clone();
@@ -355,11 +341,6 @@ public interface Container<T> extends Cloneable, Serializable {
 
         public CloneableContainer(V value) {
             super(value);
-            this.value = super.get();
-        }
-
-        public CloneableContainer(V value, boolean nullable) {
-            super(value, nullable);
             this.value = super.get();
         }
 
@@ -396,11 +377,6 @@ public interface Container<T> extends Cloneable, Serializable {
 
         public SerializableContainer(V value) {
             super(value);
-            this.value = super.get();
-        }
-
-        public SerializableContainer(V value, boolean nullable) {
-            super(value, nullable);
             this.value = super.get();
         }
 

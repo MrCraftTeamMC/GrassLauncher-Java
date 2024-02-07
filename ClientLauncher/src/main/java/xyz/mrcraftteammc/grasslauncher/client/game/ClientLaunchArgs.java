@@ -1,11 +1,13 @@
-package xyz.mrcraftteammc.grasslauncher.common.game;
+package xyz.mrcraftteammc.grasslauncher.client.game;
 
 import lombok.Getter;
 import xyz.mrcraftteammc.grasslauncher.common.GrassLauncher;
+import xyz.mrcraftteammc.grasslauncher.common.base.Side;
+import xyz.mrcraftteammc.grasslauncher.common.game.LaunchArgs;
 
 @SuppressWarnings("unused")
 @Getter
-public class ClientLaunchArgs {
+public class ClientLaunchArgs extends LaunchArgs {
     private final String javaPath; // ${javaPath}/bin/java.exe
     private final String jvmArgs;  // -XX:XX
     private final String natives; // -Djava.library.path=XX
@@ -26,6 +28,8 @@ public class ClientLaunchArgs {
                             String mainClass, String username, String gameDir, String assetsDir, String assetIndexFileName,
                             String uuid, String accessToken, UserType userType,
                             int width, int height) {
+        super(Side.CLIENT);
+
         this.javaPath = (javaPath.isEmpty() ? System.getenv("java.home") : javaPath);
         this.jvmArgs = jvmArgs;
         this.natives = natives;
@@ -42,6 +46,7 @@ public class ClientLaunchArgs {
         this.height = height;
     }
 
+    @Override
     public String mergeArgs() {
         String ver = GrassLauncher.NAME + " " + GrassLauncher.VERSION;
 
@@ -49,7 +54,7 @@ public class ClientLaunchArgs {
         // --server tcbuild.xyz
         //--port 25565
 
-        return String.format("%s/bin/java.exe %s -Djava.library.path=%s -Dminecraft.launcher.brand=%s -Dminecraft.launcher.version=%s -cp %s %s --username %s --version %s --gameDir %s --assetsDir %s --assetIndexFileName %s --uuid %s --accessToken %s --userProperties {} --userType %s --width %d --height %d",
+        return String.format("%s\\bin\\java.exe %s -Djava.library.path=%s -Dminecraft.launcher.brand=%s -Dminecraft.launcher.version=%s -cp %s %s --username %s --version %s --gameDir %s --assetsDir %s --assetIndexFileName %s --uuid %s --accessToken %s --userProperties {} --userType %s --width %d --height %d",
                 this.javaPath, this.jvmArgs, this.natives, GrassLauncher.NAME,
                 GrassLauncher.VERSION, this.classpath, this.mainClass, this.username, ver, this.gameDir,
                 this.assetsDir, this.assetIndexFileName, this.uuid, this.accessToken, this.userType.getId(),
