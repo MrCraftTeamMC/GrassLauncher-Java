@@ -1,65 +1,151 @@
 package xyz.mrcraftteammc.grasslauncher.common.network;
 
+import lombok.Getter;
 import okhttp3.*;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.io.File;
-import java.io.IOException;
 
 @ApiStatus.Experimental
-@SuppressWarnings("unused")
-public class AsyncHTTPRequestUtil {
+@SuppressWarnings({"deprecation", "unused"})
+public final class AsyncHTTPRequestUtil {
+    @Getter
     private final String str;
+    private final OkHttpClient client;
 
     public AsyncHTTPRequestUtil(String str) {
         this.str = str;
+        this.client = HTTPClientUtil.get();
     }
 
-    public void get(OkHttpClient client, Callback cb) throws IOException {
+    public AsyncHTTPRequestUtil(String str, OkHttpClient client) {
+        this.str = str;
+        this.client = client;
+    }
+
+    public void get(Callback cb)  {
         Request request = new Request.Builder()
                 .url(this.str)
                 .get()
                 .build();
 
-        client.newCall(request).enqueue(cb);
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void post(OkHttpClient client, RequestBody body, Callback cb) throws IOException {
+    public void post(RequestBody body, Callback cb) {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .post(body)
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
     
-    public void post(OkHttpClient client, MediaType type, String body, Callback cb) throws IOException {
+    public void post(MediaType type, String body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .post(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void post(OkHttpClient client, MediaType type, File body, Callback cb) throws IOException {
+    public void post(MediaType type, File body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .post(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void put(OkHttpClient client, RequestBody body, Callback cb) throws IOException {
+    public void put(RequestBody body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .put(body)
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void put(OkHttpClient client, MediaType type, String body, Callback cb) throws IOException {
+    public void put(MediaType type, String body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .put(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void put(OkHttpClient client, MediaType type, File body, Callback cb) throws IOException {
+    public void put(MediaType type, File body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .put(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void delete(OkHttpClient client, Callback cb) throws IOException {
+    public void delete(Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .delete()
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void delete(OkHttpClient client, RequestBody body, Callback cb) throws IOException {
+    public void delete(RequestBody body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .delete(body)
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void delete(OkHttpClient client, MediaType type, String body, Callback cb) throws IOException {
+    public void delete(MediaType type, String body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .delete(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void delete(OkHttpClient client, MediaType type, File body, Callback cb) throws IOException {
+    public void delete(MediaType type, File body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .delete(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void patch(OkHttpClient client, RequestBody body, Callback cb) throws IOException {
+    public void patch(RequestBody body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .patch(body)
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 
-    public void patch(OkHttpClient client, MediaType type, String body, Callback cb) throws IOException {
+    public void patch(MediaType type, String body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .patch(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
     
-    public void patch(OkHttpClient client, MediaType type, File body, Callback cb) throws IOException {
+    public void patch(MediaType type, File body, Callback cb)  {
+        Request request = new Request.Builder()
+                .url(this.str)
+                .patch(RequestBody.create(type, body))
+                .build();
+
+        this.client.newCall(request).enqueue(cb);
     }
 }

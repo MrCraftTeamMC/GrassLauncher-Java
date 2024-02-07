@@ -16,7 +16,7 @@ public class HTTPRequestTest {
 
     @Test
     public void testGet() throws IOException {
-        Response response = new HTTPRequestUtil(this.url).get(this.client).get();
+        Response response = new HTTPRequestUtil(this.url, this.client).get().get();
         if (response.isSuccessful()) {
             System.out.println("Successful!");
             System.out.println(Objects.requireNonNull(response.body()).string());
@@ -26,9 +26,8 @@ public class HTTPRequestTest {
     }
 
     @Test
-    public void testGetAsync() throws IOException, InterruptedException {
-        AsyncHTTPRequestUtil util = new AsyncHTTPRequestUtil(this.url);
-        util.get(this.client, new TestCallBack());
+    public void testGetAsync() throws InterruptedException {
+        new AsyncHTTPRequestUtil(this.url, this.client).get(new TestCallBack());
         Thread.sleep(3500);
     }
 

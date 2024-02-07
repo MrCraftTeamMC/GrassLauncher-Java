@@ -205,7 +205,8 @@ public interface Container<T> extends Cloneable, Serializable {
      * @author Mr_limr267
      * @since 1.0.0-SNAPSHOT
      */
-    class SimpleContainer<V>
+    @ApiStatus.NonExtendable
+     class SimpleContainer<V>
             implements Container<V> {
         private final V value;
         public static final Container<?> EMPTY = new SimpleContainer<>(null);
