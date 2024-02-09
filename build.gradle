@@ -163,7 +163,7 @@ subprojects {
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1"
 
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.1"
-        implementation 'com.fasterxml.woodstox:woodstox-core:6.5.0'
+        implementation 'com.fasterxml.woodstox:woodstox-core:6.6.0'
 
         implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1"
 
