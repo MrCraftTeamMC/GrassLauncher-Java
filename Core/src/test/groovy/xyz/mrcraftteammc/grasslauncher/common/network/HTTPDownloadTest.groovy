@@ -21,7 +21,11 @@ class HTTPDownloadTest {
 
         ResponseBody body = Objects.requireNonNull response.body()
         InputStream is = body.byteStream()
-        FileOutputStream fos = new FileOutputStream(new File(path, name))
+        File file = new File(path, name)
+        if (!file.exists()) {
+            file.createNewFile()
+        }
+        FileOutputStream fos = new FileOutputStream(file)
 
         byte[] buf = new byte[2048]
         int len

@@ -2,12 +2,13 @@ package xyz.mrcraftteammc.grasslauncher.common.util
 
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.json.JsonMapper
 import org.junit.jupiter.api.Test
 import xyz.mrcraftteammc.grasslauncher.common.util.config.TypeReferences
 import xyz.mrcraftteammc.grasslauncher.common.util.config.model.Simple
 
 class JsonParseTest {
-    private final ObjectMapper mapper = new ObjectMapper()
+    private final ObjectMapper mapper = new JsonMapper()
     private final Simple simple = new Simple("Mr_zmh5", 41, 11.4f, 'A' as char, Arrays.asList("Bilibili", "Minecraft", "Steam"), new LinkedHashMap<>(), true)
     private final List<Simple> simpleList = new ArrayList<>()
     private final Map<String, Simple> simpleMap = new LinkedHashMap<>()
