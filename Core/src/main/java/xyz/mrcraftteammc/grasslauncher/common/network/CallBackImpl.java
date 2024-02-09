@@ -10,8 +10,12 @@ import java.io.IOException;
 public interface CallBackImpl extends Callback {
     @Override
     default void onFailure(@NotNull Call call, @NotNull IOException e) {
-        System.err.println("Failed to Get.");
+        System.err.println(this.failureMessage());
         System.err.println(e.getLocalizedMessage());
+    }
+
+    default String failureMessage() {
+        return "Failed to Request.";
     }
 
     @Override

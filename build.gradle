@@ -1,5 +1,11 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id 'java'
+//    id "groovy"
+    id "scala"
+    id "org.jetbrains.kotlin.jvm" version "1.9.22"
+
     id 'maven-publish'
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
     id 'de.undercouch.download' version '5.5.0' apply false
@@ -7,6 +13,10 @@ plugins {
 
 allprojects {
     apply plugin: "java"
+    apply plugin: 'groovy'
+    apply plugin: "scala"
+    apply plugin: "org.jetbrains.kotlin.jvm"
+
     apply plugin: "maven-publish"
 
     group = rootProject.maven_group
@@ -21,20 +31,68 @@ allprojects {
         mavenCentral()
     }
 
-    tasks.withType(JavaCompile).configureEach {
-        // ensure that the encoding is set to UTF-8, no matter what the system default is
-        // this fixes some edge cases with special characters not displaying correctly // see [http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html](http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html)
-        // If Javadoc is generated, this must be specified in that task too.
-        it.options.encoding = "UTF-8"
-//        it.options.release = 8
+    def CompileTasks = [
+            ScalaCompile,
+            JavaCompile,
+            GroovyCompile
+    ]
+
+    CompileTasks.forEach { clz ->
+        tasks.withType(clz).configureEach { tsk ->
+            tsk.options.encoding = "UTF-8"
+        }
     }
 
-    tasks.withType(Javadoc).configureEach {
-        it.options.encoding = 'UTF-8'
+    def DocTasks = [
+            ScalaDoc,
+            Javadoc
+    ]
+
+    DocTasks.forEach { clz ->
+        tasks.withType(clz).configureEach { tsk ->
+            tsk.options.encoding = "UTF-8"
+        }
+    }
+
+    tasks.withType(KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
     }
 
     tasks.withType(Test).configureEach {
         it.systemProperty "file.encoding", "UTF-8"
+    }
+
+    sourceSets {
+        main {
+            scala {
+                srcDirs "src/main/scala"
+            }
+            java {
+                srcDirs "src/main/java"
+            }
+            kotlin {
+                srcDirs "src/main/kotlin"
+            }
+            groovy {
+                srcDirs "src/main/groovy"
+            }
+        }
+        test {
+            scala {
+                srcDirs "src/test/scala"
+            }
+            java {
+                srcDirs "src/test/java"
+            }
+            kotlin {
+                srcDirs "src/test/kotlin"
+            }
+            groovy {
+                srcDirs "src/test/groovy"
+            }
+        }
     }
 
     java {
@@ -71,20 +129,67 @@ subprojects {
     }
 
     dependencies {
+        // Scala
+        implementation "org.scala-lang:scala-library:2.13.12"
+        implementation "org.scala-lang:scala-compiler:2.13.12"
+        implementation "org.scala-lang:scala-reflect:2.13.12"
+
+        // Kotlin
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
+
+        // Groovy
+        implementation gradleApi()
+        implementation localGroovy()
+
         // Annotations
         annotationProcessor(compileOnly("org.projectlombok:lombok:1.18.30"))
         compileOnly 'org.jetbrains:annotations:24.1.0'
+        compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+
         // Logging
         implementation "org.apache.logging.log4j:log4j-api:2.22.1"
         implementation "org.apache.logging.log4j:log4j-core:2.22.1"
         implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.22.1"
 
         // Common
-        implementation "com.github.KenRouKoro:ctoml4j:1.0.1"
-        implementation "com.google.code.gson:gson:2.10.1"
-//    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0-rc1'
-        implementation "com.squareup.okhttp3:okhttp:4.12.0"
+//        implementation "com.github.KenRouKoro:ctoml4j:1.0.1"
+//        implementation "com.google.code.gson:gson:2.10.1"
+//        implementation "com.google.guava:guava:33.0.0-jre"
+        implementation "com.fasterxml.jackson.core:jackson-databind:2.16.1"
+
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-toml:2.16.1"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.16.1"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.16.1"
+
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.16.1"
+        implementation 'com.fasterxml.woodstox:woodstox-core:6.5.0'
+
+        implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1"
+
+        implementation("com.squareup.okhttp3:okhttp:4.12.0") {
+            exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-jdk8"
+            exclude group: "org.jetbrains.kotlin", module: "kotlin-stdlib-common"
+        }
+//        implementation "io.netty:netty-all:4.1.105.Final"
+//        implementation "commons-codec:commons-codec:1.16.0"
+//        implementation "commons-fileupload:commons-fileupload:1.5"
+//        implementation "commons-net:commons-net:3.10.0"
         implementation "commons-io:commons-io:2.15.1"
+//        implementation "org.apache.commons:commons-collections4:4.4"
+//        implementation "org.apache.commons:commons-compress:1.25.0"
+//        implementation "org.apache.commons:commons-configuration2:2.9.0"
+//        implementation "org.apache.commons:commons-csv:1.10.0"
+//        implementation "org.apache.commons:commons-email:1.6.0"
+//        implementation "org.apache.commons:commons-exec:1.4.0"
+//        implementation "org.apache.commons:commons-math4-core:4.0-beta1"
+//        implementation "org.apache.commons:commons-numbers-bom:1.1"
+//        implementation "org.apache.commons:commons-pool2:2.12.0"
+//        implementation "org.apache.commons:commons-rdf-parent:0.5.0"
+//        implementation "org.apache.commons:commons-rng-bom:1.5"
+//        implementation "org.apache.commons:commons-text:1.11.0"
+//        implementation "org.apache.commons:commons-vfs2:2.9.0"
+        implementation "org.apache.commons:commons-lang3:3.14.0"
 
         // Tests
         annotationProcessor(testCompileOnly("org.projectlombok:lombok:1.18.30"))
@@ -98,5 +203,13 @@ subprojects {
         testLogging {
             events "passed", "skipped", "failed"
         }
+    }
+
+    jar {
+        zip64 true
+    }
+
+    shadowJar {
+        zip64 true
     }
 }

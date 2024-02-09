@@ -23,9 +23,12 @@ public final class AsyncHTTPRequestUtil {
         this.client = client;
     }
 
+    // .addHeader("Connection", "close")
+
     public void get(Callback cb)  {
         Request request = new Request.Builder()
                 .url(this.str)
+                .addHeader("Connection", "close")
                 .get()
                 .build();
 

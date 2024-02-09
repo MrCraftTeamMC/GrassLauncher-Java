@@ -41,5 +41,8 @@ rem For Windows
 
 Then you can find the jar ends with `-full` in `build/libs` dir of project `ClientLauncher` and `ServerLauncher`.
 
+## TODO 
+ClassPaths instead of ShadowJar
+
 ## License
 This project is under [GNU General Public License v3](./LICENSE).
