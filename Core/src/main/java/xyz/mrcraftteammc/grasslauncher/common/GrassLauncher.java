@@ -12,6 +12,7 @@ import xyz.mrcraftteammc.grasslauncher.common.base.Side;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * The Main Class of GrassLauncher
@@ -24,42 +25,18 @@ public class GrassLauncher {
     public static final String VERSION = "1.0.0-SNAPSHOT";
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
     public static final String JVM_VERSION = System.getProperty("java.version");
+    public static final Consumer<Throwable> LOG_EXCEPTION = t -> {
+        LOGGER.error("Exception occurred: " + t.getMessage());
+        t.printStackTrace();
+    };
 
     @TestOnly
     public static void main(String[] args, Side side) {
         try {
             LOGGER.info("{} is loading at {} side... Version: {}", NAME, side.getId(), VERSION);
             LOGGER.info("Runs on: \n{}", JVM_VERSION);
-
-//            Launch.runClient(new Container.SimpleContainer<>(new ClientLaunchArgs(
-//                    "-",
-//                    "-Xmx2048m -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -Djava.rmi.server.useCodebaseOnly=true -Dcom.sun.jndi.rmi.object.trustURLCodebase=false -Dcom.sun.jndi.cosnaming.object.trustURLCodebase=false -Dlog4j2.formatMsgNoLookups=true -Dlog4j.configurationFile=D:\\- -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32m -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -XX:-DontCompileHugeMethods",
-//                    "-",
-//                    "-",
-//                    "net.minecraft.client.main.Main",
-//                    "-",
-//                    "D:\\-",
-//                    "D:\\-",
-//                    "1.8",
-//                    "-",
-//                    "-",
-//                    ClientLaunchArgs.UserType.MICROSOFT,
-//                    854,
-//                    480
-//            )));
-
-//            if (side == Side.SERVER) {
-//                Launch.runServer(new Container.SimpleContainer<>(new ServerLaunchArgs(
-//                        "D:\\-",
-//                        "-Xmx1024M",
-//                        "D:\\-",
-//                        true
-//                )));
-//            }
-
-//            GrassLauncherUI.onStartup();
         } catch (Throwable t) {
-            logThrowable(t);
+            LOG_EXCEPTION.accept(t);
         }
     }
 
@@ -67,6 +44,7 @@ public class GrassLauncher {
         return new ArrayList<>();
     }
 
+    @Deprecated
     public static void logThrowable(Throwable t) {
         StringBuilder err = new StringBuilder();
 

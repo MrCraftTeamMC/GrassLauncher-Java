@@ -1,5 +1,6 @@
 package xyz.mrcraftteammc.grasslauncher.common.util.config.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,12 +15,11 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public final class Simple {
+@JsonPropertyOrder({"name", "id", "age", "grade", "verified"})
+public final class CsvSimple {
     private String name;
     private int id;
     private float age;
     private char grade;
-    private List<String> hobbies;
-    private Map<String, String> urls;
     private boolean verified;
 }
