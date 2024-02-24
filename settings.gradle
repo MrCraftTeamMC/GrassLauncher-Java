@@ -13,8 +13,4 @@ pluginManagement {
     }
 }
 
-include ":Core"
-include ":ClientLauncher"
-include ":ServerLauncher"
-
-rootProject.name = 'GrassLauncher'
+rootProject.name = 'GrassLauncher-Java'
