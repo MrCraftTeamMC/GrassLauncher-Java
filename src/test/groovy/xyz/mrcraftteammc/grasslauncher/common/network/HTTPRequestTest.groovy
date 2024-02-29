@@ -14,7 +14,7 @@ class HTTPRequestTest {
 
     @Test
     void httpGet() {
-        Response response = new HTTPRequestTest(this.url, this.client).get().get()
+        Response response = new HTTPRequestUtil(this.url, this.client).get()
         if (response.isSuccessful()) {
             println "Successful!"
             println Objects.requireNonNull(response.body()).string()
