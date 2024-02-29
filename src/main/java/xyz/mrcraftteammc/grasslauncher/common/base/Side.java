@@ -2,6 +2,7 @@ package xyz.mrcraftteammc.grasslauncher.common.base;
 
 import lombok.Getter;
 
+@Deprecated
 @Getter
 public enum Side {
     CLIENT("client"),

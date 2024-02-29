@@ -7,7 +7,7 @@
 English | [中文](./Readme_cn.md)
 
 ## Introduction
-A simple cross-platform Minecraft Launcher (include client and server).
+A simple cross-platform Minecraft Server Launcher.
 
 Made with Java. UI is based in `javax.swing` and `java.awt`.
 
@@ -39,7 +39,7 @@ rem For Windows
 .\gradlew.bat clean shadowJar --stacktrace --no-daemon
 ```
 
-Then you can find the jar ends with `-full` in `build/libs` dir of project `ClientLauncher` and `ServerLauncher`.
+Then you can find the jar ends with `-all` in `build/libs` dir of project `ClientLauncher` and `ServerLauncher`.
 
 ## TODO 
 ClassPaths instead of ShadowJar

@@ -137,6 +137,15 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
+processResources {
+    inputs.property "version", project.version
+
+    filteringCharset "UTF-8"
+    filesMatching("config.yml") {
+        expand "version": project.version
+    }
+}
+
 test {
     useJUnitPlatform()
 
@@ -151,7 +160,7 @@ test {
 jar {
     manifest {
         attributes "Manifest-Version": "1.0"
-        attributes "Main-Class": "xyz.mrcraftteammc.grasslauncher.main.Main"
+        attributes "Main-Class": "xyz.mrcraftteammc.grasslauncher.main.UIMain"
         attributes "Implementation-Title": "Gradle"
     }
 

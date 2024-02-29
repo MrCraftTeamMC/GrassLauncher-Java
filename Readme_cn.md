@@ -7,11 +7,10 @@
 [English](./Readme.md) | 中文
 
 ## 介绍
-一个简单、跨平台的 MC 启动器（包括客户端和服务端）。
+一个简单、跨平台的 MC 开服器。
 
 使用 Java 编写。UI 是基于 `javax.swing` 和 `java.awt`。
 
-For more details, please see the wiki page.
 更多信息请查看 Wiki。
 
 ## 下载
@@ -40,7 +39,7 @@ rem For Windows
 .\gradlew.bat clean shadowJar --stacktrace --no-daemon
 ```
 
-然后，你可以`ClientLauncher` 和 `ServerLauncher`里的 `build/libs` 中获得可运行的 jar。 (文件名以`-full`结尾)
+然后，你可以`ClientLauncher` 和 `ServerLauncher`里的 `build/libs` 中获得可运行的 jar。 (文件名以`-all`结尾)
 
 ## 许可证
 本项目的许可证为 [GPL v3](./LICENSE)。

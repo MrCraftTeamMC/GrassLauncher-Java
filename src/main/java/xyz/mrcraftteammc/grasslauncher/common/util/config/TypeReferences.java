@@ -10,8 +10,7 @@ import java.util.Map;
 public enum TypeReferences {
     LIST(new TypeReference<List<?>>() {
     }),
-    MAP(new TypeReference<Map<String, ?>>(){
-
+    MAP(new TypeReference<Map<?, ?>>(){
     });
 
     private final TypeReference<?> typeReference;

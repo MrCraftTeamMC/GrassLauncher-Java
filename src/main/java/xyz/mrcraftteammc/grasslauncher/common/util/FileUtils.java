@@ -3,7 +3,7 @@ package xyz.mrcraftteammc.grasslauncher.common.util;
 import java.io.File;
 import java.io.IOException;
 
-public final class FileUtil {
+public final class FileUtils {
     public static String getFilenameFromUrl(String url) {
         return url.substring(url.lastIndexOf('/') + 1);
     }

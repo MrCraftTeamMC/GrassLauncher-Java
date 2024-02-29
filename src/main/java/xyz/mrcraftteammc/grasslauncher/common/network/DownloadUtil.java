@@ -4,7 +4,7 @@ import lombok.Getter;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import xyz.mrcraftteammc.grasslauncher.common.GrassLauncher;
-import xyz.mrcraftteammc.grasslauncher.common.util.FileUtil;
+import xyz.mrcraftteammc.grasslauncher.common.util.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,7 +25,7 @@ public final class DownloadUtil {
     public DownloadUtil(String url, String path) {
         this.url = url;
         this.path = path;
-        this.file = FileUtil.getFilenameFromUrl(url);
+        this.file = FileUtils.getFilenameFromUrl(url);
     }
 
     public DownloadUtil(String url, String path, String file) {
@@ -47,7 +47,7 @@ public final class DownloadUtil {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 GrassLauncher.LOGGER.error("Failed to Download.");
-                GrassLauncher.logThrowable(e);
+                GrassLauncher.LOG_EXCEPTION.accept(e);
             }
 
             @Override
