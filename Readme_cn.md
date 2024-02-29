@@ -19,7 +19,7 @@
 ## 贡献
 如果你是玩家，你可以提交关于 bug，功能等的 Issues。
 
-欢迎 Fork 和提提交 PR。
+欢迎 Fork 和提交 PR。
 
 ### 编译
 请使用 [Intellij IDEA](https://www.jetbrains.com/idea) 和 Java 8及以上 版本。
