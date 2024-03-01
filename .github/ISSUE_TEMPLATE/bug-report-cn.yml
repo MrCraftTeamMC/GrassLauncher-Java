@@ -1,0 +1,92 @@
+name: 错误报告表格
+description: 通过填写表格来报告错误
+labels: [ "Triage" ]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请使用[最新的构建版本](https://github.com/MrCraftTeamMC/GrassLauncher-Java/actions/workflows/ci.yml?query=branch:main+is:success)报告，你发现的问题很可能已经修复。
+
+  - type: checkboxes
+    id: check
+    attributes:
+      label: 一些提交前检查
+      description: 我们只能解决与 GrassLauncher 本体有关的问题
+      options:
+        - label: 正在使用最新的 GrassLauncher
+        - label: 已为所有插件及模组安装依赖
+          required: true
+        - label: 已为所有插件及模组更新至最新版
+          required: true
+        - label: 无法在 GrassLauncher 以外的环境复现
+          required: true
+        - label: 请确保没有类似的现有的报告
+          required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: GrassLauncher 版本
+      description: 在 GrassLauncher 的帮助页
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Java 版本 | 操作系统
+      description: 在命令行中键入 `java -version` 后可以获取版本
+      placeholder: |
+        系统: Windows 11 x64, Java: Azul Zulu 21
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 错误描述
+      description: >-
+        请尽可能包含更多关于 Bug 的描述
+        <br>越清楚的描述会让该报告处理优先级提高
+      placeholder: "描述这个为什么是一个错误，是哪一方面的，以及其他可能需要的信息"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 预期行为
+      description: >-
+        请描述您预期 GrassLauncher 会做的事情
+        <br>越清楚的描述会让该报告处理优先级提高
+      placeholder: "描述你认为 GrassLauncher 的正常行为，以及其他可能需要的信息"
+
+  - type: textarea
+    id: step
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开启动器
+
+        2. 启动实例 xxx
+
+        3. ......
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 报错信息
+      description: >-
+        日志能在 /logs/latest.log 中找到
+        <br>GrassLauncher 关闭后，将日志文件拖拽至输入框上传
+        <br>或上传至 https://paste.ubuntu.com/ 网站，提交后将链接附在下方即可
+        <br>如果选择使用其他在线剪贴板，请确保链接可用
+        <br>**请勿直接复制粘贴日志文本**
+      placeholder: 日志链接，或将日志文件拖到此处上传
+
+  - type: input
+    id: pack
+    attributes:
+      label: 复现用压缩包下载链接(可选)
+      description: 如果你实在描述不清楚 Bug，你可以打包实例和配置文件并上传到 OneDrive 上供开发者下载测试

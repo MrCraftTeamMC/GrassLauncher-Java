@@ -20,4 +20,9 @@ class FileTests {
     void filename() {
         println url.substring(url.lastIndexOf("/") + 1, url.length())
     }
+
+    @Test
+    void userdir() {
+        println System.getProperty("user.dir")
+    }
 }

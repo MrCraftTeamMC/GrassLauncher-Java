@@ -160,7 +160,7 @@ test {
 jar {
     manifest {
         attributes "Manifest-Version": "1.0"
-        attributes "Main-Class": "xyz.mrcraftteammc.grasslauncher.main.UIMain"
+        attributes "Main-Class": "xyz.mrcraftteammc.grasslauncher.main.Main"
         attributes "Implementation-Title": "Gradle"
     }
 

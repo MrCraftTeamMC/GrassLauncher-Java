@@ -28,10 +28,13 @@ public class AWTUIMain {
 //        checkbox.setCheckboxGroup(group);
 
         Frame frame = new Frame("GrassLauncher | 1.0.0 - SNAPSHOT");
+
+        Image image = Toolkit.getDefaultToolkit().getImage("icon.png");
+        frame.setIconImage(image);
+
 //        frame.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
 //        frame.setBackground(Color.GREEN);
-//        frame.setIconImage();
 
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
