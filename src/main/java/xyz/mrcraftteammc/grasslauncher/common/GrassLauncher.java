@@ -68,4 +68,7 @@ public class GrassLauncher {
 
         LOGGER.error(err.toString());
     }
+
+    public GrassLauncher() {
+    }
 }

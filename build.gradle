@@ -144,6 +144,10 @@ processResources {
     filesMatching("config.yml") {
         expand "version": project.version
     }
+
+    filesMatching("grasslauncher.extension.yml") {
+        expand "version": project.version
+    }
 }
 
 test {

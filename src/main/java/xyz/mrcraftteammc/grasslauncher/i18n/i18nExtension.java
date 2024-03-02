@@ -1,30 +1,25 @@
 package xyz.mrcraftteammc.grasslauncher.i18n;
 
-import xyz.mrcraftteammc.grasslauncher.common.CommonConstants;
 import xyz.mrcraftteammc.grasslauncher.extension.Extension;
-import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionLoadingException;
+import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
 
 public class i18nExtension extends Extension {
     public i18nExtension() {
-        super("i18n",
-                "i18nExtension",
-                CommonConstants.VERSION,
-                "The Lauguage provider plugin of GrassLauncher.",
-                i18nExtension.class);
+        super("grasslauncher");
     }
 
     @Override
-    public void onLoaded() throws ExtensionLoadingException {
-
+    public void onLoad() throws ExtensionException {
+        this.getLogger().info("Hello i18nExtension!");
     }
 
     @Override
-    public void onEnabled() throws ExtensionLoadingException {
-
+    public void onEnabled() throws ExtensionException {
+        super.onEnabled();
     }
 
     @Override
-    public void onDisabled() throws ExtensionLoadingException {
-
+    public void onDisabled() throws ExtensionException {
+        super.onDisabled();
     }
 }
