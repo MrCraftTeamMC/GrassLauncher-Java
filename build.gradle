@@ -74,6 +74,8 @@ java {
 publishing {
     publications {
         MrCraftTeamMC(MavenPublication) {
+            artifactId "grasslauncher-java"
+
             from(components.java)
         }
     }
