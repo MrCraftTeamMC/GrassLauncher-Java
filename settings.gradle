@@ -13,4 +13,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'GrassLauncher-Java'
+rootProject.name = 'grasslauncher-java'
