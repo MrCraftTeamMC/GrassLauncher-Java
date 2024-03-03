@@ -88,15 +88,15 @@ publishing {
             }
         }
 
-        maven {
-            name = "LocalMavenSnapshot"
-            url = "file:/${project.local_maven_repo}/Snapshot"
-        }
-
-        maven {
-            name = "LocalMavenReleases"
-            url = "file:/${project.local_maven_repo}/Releases"
-        }
+//        maven {
+//            name = "LocalMavenSnapshot"
+//            url = "file:/${project.local_maven_repo}/Snapshot"
+//        }
+//
+//        maven {
+//            name = "LocalMavenReleases"
+//            url = "file:/${project.local_maven_repo}/Releases"
+//        }
         // Jitpack
     }
 }
