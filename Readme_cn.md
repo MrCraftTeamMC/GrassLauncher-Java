@@ -4,6 +4,8 @@
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/MrCraftTeamMC/GrassLauncher/total)
 ![GitHub Release](https://img.shields.io/github/v/release/MrCraftTeamMC/GrassLauncher)
 
+[![Jitpack Maven Release](https://jitpack.io/v/MrCraftTeamMC/GrassLauncher-Java.svg)](https://jitpack.io/#MrCraftTeamMC/GrassLauncher-Java)
+
 [English](./Readme.md) | 中文
 
 ## 介绍
