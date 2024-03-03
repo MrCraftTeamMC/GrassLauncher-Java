@@ -1,20 +1,21 @@
 package xyz.mrcraftteammc.grasslauncher.extension;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.jetbrains.annotations.ApiStatus;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @ApiStatus.NonExtendable
 public final class ExtensionManifest {
     private String id;
     private String name;
     private String version;
     private String description;
-    private List<String> mainClasses;
+
+    public static ExtensionManifest defaultManifest() {
+        return new ExtensionManifest("example", "Example Extension", "1.0.0", "This is an example extension.");
+    }
 }

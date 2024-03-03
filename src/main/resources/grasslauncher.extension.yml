@@ -2,6 +2,3 @@ id: "grasslauncher"
 name: "GrassLauncher"
 version: "${version}"
 description: "A Minecraft Server Launcher."
-main_class:
-  - "xyz.mrcraftteammc.grasslauncher.commmon.DefaultExtension"
-  - "xyz.mrcraftteammc.grasslauncher.i18n.i18nExtension"

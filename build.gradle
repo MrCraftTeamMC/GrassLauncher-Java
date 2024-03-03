@@ -87,6 +87,16 @@ publishing {
                 password = project.findProperty("gh_maven_password") ?: System.getenv("TOKEN")
             }
         }
+
+        maven {
+            name = "LocalMavenSnapshot"
+            url = "file:/${project.local_maven_repo}/Snapshot"
+        }
+
+        maven {
+            name = "LocalMavenReleases"
+            url = "file:/${project.local_maven_repo}/Releases"
+        }
         // Jitpack
     }
 }
@@ -100,9 +110,9 @@ dependencies {
     implementation localGroovy()
 
     // Annotations
-    annotationProcessor(compileOnly("org.projectlombok:lombok:1.18.30"))
-    compileOnly 'org.jetbrains:annotations:24.1.0'
-    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    annotationProcessor(implementation("org.projectlombok:lombok:1.18.30"))
+    implementation 'org.jetbrains:annotations:24.1.0'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
     // Logging
     implementation "org.apache.logging.log4j:log4j-api:2.23.0"
@@ -132,7 +142,7 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:3.14.0"
 
     // Tests
-    annotationProcessor(testCompileOnly("org.projectlombok:lombok:1.18.30"))
+    annotationProcessor(testImplementation("org.projectlombok:lombok:1.18.30"))
     testImplementation platform('org.junit:junit-bom:5.10.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
@@ -173,4 +183,8 @@ jar {
 
 shadowJar {
     zip64 true
+}
+
+sourcesJar {
+    duplicatesStrategy DuplicatesStrategy.INCLUDE
 }

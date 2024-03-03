@@ -10,5 +10,5 @@ public class CommonConstants {
     public static final String JAVA_HOME = System.getProperty("java.home");
     public static final String PATH_SEPARATOR = FileSystems.getDefault().getSeparator();
 
-    public static final String EXTENSIONS_DIR = "extensions";
+    public static final String EXTENSIONS_DIR = "extensions/";
 }

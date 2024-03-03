@@ -1,28 +1,29 @@
 package xyz.mrcraftteammc.grasslauncher.extension;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.mrcraftteammc.grasslauncher.common.CommonConstants;
 import xyz.mrcraftteammc.grasslauncher.common.DefaultExtension;
-import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
+import xyz.mrcraftteammc.grasslauncher.extension.annotations.ExtensionInstance;
 import xyz.mrcraftteammc.grasslauncher.i18n.i18nExtension;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Objects;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 // TODO: Complete Loader
 public final class ExtensionLoader {
     private final Logger logger = LoggerFactory.getLogger("GrassLauncher Extension Loader");
     private final File file = new File(CommonConstants.EXTENSIONS_DIR);
-    private final ObjectMapper mapper = new JsonMapper();
+    private final YAMLMapper mapper = new YAMLMapper();
     private final List<Extension> extensionList;
 
     public ExtensionLoader() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -34,6 +35,7 @@ public final class ExtensionLoader {
 
         if (!file.isDirectory()) throw new IOException("The extension path is not a directory.");
 
+        List<File> files = new ArrayList<>();
         List<Extension> extensions = new ArrayList<>();
 
         extensions.add(new DefaultExtension());
@@ -41,30 +43,35 @@ public final class ExtensionLoader {
 
         for (File f : Objects.requireNonNull(file.listFiles())) {
             if (f.getName().endsWith(".jar")) {
-                URLClassLoader loader = new URLClassLoader(new URL[]{f.toURI().toURL()}, Thread.currentThread().getContextClassLoader());
+                files.add(f);
+            }
+        }
 
-                InputStream is = loader.getResourceAsStream("grasslauncher.extension.yml");
+        for (File f : files) {
+            try (JarFile jar = new JarFile(f)) {
+                Enumeration<JarEntry> entries = jar.entries();
 
-                ExtensionManifest manifest = mapper.readValue(is, ExtensionManifest.class);
-                List<String> mainClasses = manifest.getMainClasses();
+                while (entries.hasMoreElements()) {
+                    JarEntry entry = entries.nextElement();
 
-                for (String clazz : mainClasses) {
-                    Class<?> cls = loader.loadClass(clazz);
+                    if (entry.isDirectory() || !entry.getName().endsWith(".class")) {
+                        continue;
+                    }
+                    String clz = entry.getName()
+                            .substring(0, entry.getName().length() - 6)
+                            .replace('/', '.');
+                    URLClassLoader loader =  new URLClassLoader(new URL[]{f.toURI().toURL()},
+                            Thread.currentThread().getContextClassLoader());
+                    Class<?> clazz = loader.loadClass(clz);
 
-                    Object o = cls.newInstance();
-                    if (o instanceof Extension) {
-                        if (Objects.equals(((Extension) o).getId(), manifest.getId())) {
+                    if (clazz.getAnnotation(ExtensionInstance.class) != null) {
+                        Object o = clazz.newInstance();
+
+                        if (o instanceof Extension) {
                             extensions.add((Extension) o);
-                        } else {
-                            throw new ExtensionException(String.format("An error occurred in loading Plugin `%s` : The id in the extension constructor is not same as the manifest file!", manifest.getId()));
                         }
                     }
                 }
-
-                if (is != null) {
-                    is.close();
-                }
-                loader.close();
             }
         }
 
