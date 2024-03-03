@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.mrcraftteammc.grasslauncher.common.CommonConstants;
+import xyz.mrcraftteammc.grasslauncher.common.DefaultExtension;
 import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
+import xyz.mrcraftteammc.grasslauncher.i18n.i18nExtension;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +35,9 @@ public final class ExtensionLoader {
         if (!file.isDirectory()) throw new IOException("The extension path is not a directory.");
 
         List<Extension> extensions = new ArrayList<>();
+
+        extensions.add(new DefaultExtension());
+        extensions.add(new i18nExtension());
 
         for (File f : Objects.requireNonNull(file.listFiles())) {
             if (f.getName().endsWith(".jar")) {
