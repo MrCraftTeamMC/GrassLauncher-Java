@@ -16,5 +16,5 @@ public final class ExtensionManifest {
     private String name;
     private String version;
     private String description;
-    private List<String> main_class;
+    private List<String> mainClasses;
 }

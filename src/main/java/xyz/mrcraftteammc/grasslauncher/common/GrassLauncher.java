@@ -19,6 +19,7 @@ import java.util.function.Consumer;
  * @version 1.0.0-SNAPSHOT
 */
 @NotRunnable
+@Deprecated
 public class GrassLauncher {
     public static final String NAME = "GrassLauncher";
     public static final String VERSION = "1.0.0-SNAPSHOT";
@@ -35,7 +36,7 @@ public class GrassLauncher {
             LOGGER.info("{} is loading at {} side... Version: {}", NAME, side.getId(), VERSION);
             LOGGER.info("Runs on: \n{}", JVM_VERSION);
         } catch (Throwable t) {
-            LOG_EXCEPTION.  accept(t);
+            LOG_EXCEPTION.accept(t);
         }
     }
 

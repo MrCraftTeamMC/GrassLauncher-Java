@@ -21,7 +21,7 @@ public abstract class Extension {
     }
 
     public Logger getLogger() {
-        return LoggerFactory.getLogger(String.format("GrassLauncher Plugin | %s", this.id));
+        return LoggerFactory.getLogger(String.format("GrassLauncher Extension | %s", this.id));
     }
 
     public GrassLauncher getLauncherInstance() {
