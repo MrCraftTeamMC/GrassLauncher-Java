@@ -73,19 +73,21 @@ java {
 
 publishing {
     publications {
-        MrCraftTeamMCMaven(MavenPublication) {
-            from components.java
+        MrCraftTeamMC(MavenPublication) {
+            from(components.java)
         }
     }
 
     repositories {
         maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/MrCraftTeamMC/GrassLauncher"
+            url = "https://maven.pkg.github.com/MrCraftTeamMC/GrassLauncher-Java"
             credentials {
                 username = project.findProperty("gh_maven_username") ?: System.getenv("USERNAME")
                 password = project.findProperty("gh_maven_password") ?: System.getenv("TOKEN")
             }
+
+            allowInsecureProtocol true
         }
 
 //        maven {

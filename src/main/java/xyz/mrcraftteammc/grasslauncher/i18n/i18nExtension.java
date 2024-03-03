@@ -1,8 +1,10 @@
 package xyz.mrcraftteammc.grasslauncher.i18n;
 
 import xyz.mrcraftteammc.grasslauncher.extension.Extension;
+import xyz.mrcraftteammc.grasslauncher.extension.annotations.ExtensionInstance;
 import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
 
+@ExtensionInstance
 public class i18nExtension extends Extension {
     public i18nExtension() {
         super("grasslauncher");
