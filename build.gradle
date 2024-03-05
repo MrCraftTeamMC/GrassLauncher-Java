@@ -109,6 +109,7 @@ publishing {
 }
 
 configurations {
+    implementation.extendsFrom shadow
 }
 
 dependencies {
@@ -122,33 +123,34 @@ dependencies {
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
     // Logging
-    implementation "org.apache.logging.log4j:log4j-api:2.23.0"
-    implementation "org.apache.logging.log4j:log4j-core:2.23.0"
-    implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.23.0"
+    shadow "org.apache.logging.log4j:log4j-api:2.23.0"
+    shadow "org.apache.logging.log4j:log4j-core:2.23.0"
+    shadow "org.apache.logging.log4j:log4j-slf4j-impl:2.23.0"
 
     // Common
-    implementation "com.fasterxml.jackson.core:jackson-databind:2.16.1"
-    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1"
-    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.16.1"
-    implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.1"
-    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1"
+    shadow "com.fasterxml.jackson.core:jackson-databind:2.16.1"
+    shadow "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1"
+    shadow "com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.16.1"
+    shadow "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1"
+    shadow "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.1"
+    shadow "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1"
 
-    implementation "com.squareup.okhttp3:okhttp:4.12.0"
-    implementation "io.netty:netty-all:4.1.107.Final"
-    //implementation "commons-codec:commons-codec:1.16.0"
-    //implementation "commons-net:commons-net:3.10.0"
-    implementation "commons-io:commons-io:2.15.1"
-    //implementation "org.apache.commons:commons-collections4:4.4"
-    //implementation "org.apache.commons:commons-compress:1.25.0"
-    //implementation "org.apache.commons:commons-rng-bom:1.5"
-    //implementation "org.apache.commons:commons-text:1.11.0"
-    implementation "org.apache.commons:commons-lang3:3.14.0"
+    shadow "com.squareup.okhttp3:okhttp:4.12.0"
+    shadow "io.netty:netty-all:4.1.107.Final"
+    //shadow "commons-codec:commons-codec:1.16.0"
+    //shadow "commons-net:commons-net:3.10.0"
+    shadow "commons-io:commons-io:2.15.1"
+    //shadow "org.apache.commons:commons-collections4:4.4"
+    //shadow "org.apache.commons:commons-compress:1.25.0"
+    //shadow "org.apache.commons:commons-rng-bom:1.5"
+    //shadow "org.apache.commons:commons-text:1.11.0"
+    shadow "org.apache.commons:commons-lang3:3.14.0"
 
-//    implementation "org.spongepowered:mixin:0.8.5"
-    implementation "net.fabricmc:sponge-mixin:0.13.0+mixin.0.8.5"
-    implementation "com.google.guava:guava:33.0.0-jre"
-    implementation "com.google.code.gson:gson:2.10.1"
+//    shadow "org.spongepowered:mixin:0.8.5"
+    shadow(annotationProcessor("net.fabricmc:sponge-mixin:0.13.0+mixin.0.8.5"))
+    shadow "com.google.guava:guava:33.0.0-jre"
+    shadow "com.google.code.gson:gson:2.10.1"
+    shadow(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
 
     // Tests
     annotationProcessor(testImplementation("org.projectlombok:lombok:1.18.30"))
@@ -191,6 +193,14 @@ jar {
 }
 
 shadowJar {
+    configurations = [project.configurations.shadow]
+
+    def reloc = {
+        p -> relocate((String) p, "xyz.mrcraftteammc.library.$p")
+    }
+
+    mergeGroovyExtensionModules()
+    mergeServiceFiles()
     zip64 true
 }
 

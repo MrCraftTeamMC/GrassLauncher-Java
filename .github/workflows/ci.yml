@@ -7,6 +7,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  discussions: write
+
 jobs:
   build:
     if: github.event_name != 'pull_request'
@@ -34,11 +38,30 @@ jobs:
       - name: Get short SHA
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Read Properties mod info
+        id: prop_info
+        uses: christian-draeger/read-properties@1.1.1
         with:
-          name: GrassLauncher-${{ env.SHORT_SHA }}
-          path: build/libs/
+          path: gradle.properties
+          properties: "release_version"
+
+#      - name: Upload Artifacts
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: GrassLauncher-${{ env.SHORT_SHA }}
+#          path: build/libs/
+
+      - name: Publish GitHub Pre-Release
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
+          files: |
+            build/libs/*.jar
+          tag_name: "${{ steps.prop_info.outputs.release_version }}-${{ env.SHORT_SHA }}"
+          target_commitish: ${{ github.event.ref }}
+          discussion_category_name: Announcement
+          generate_release_notes: true
+          token: ${{ secrets.PUBLISH_TOKEN }}
 
   test:
     runs-on: ubuntu-latest

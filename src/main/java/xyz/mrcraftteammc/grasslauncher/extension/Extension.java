@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import xyz.mrcraftteammc.grasslauncher.common.GrassLauncher;
 import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public abstract class Extension {
@@ -18,6 +21,10 @@ public abstract class Extension {
     }
 
     public void onDisabled() throws ExtensionException {
+    }
+
+    public String[] getMixinConfigs() {
+        return null;
     }
 
     public Logger getLogger() {
