@@ -3,7 +3,6 @@ package xyz.mrcraftteammc.grasslauncher.extension;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spongepowered.asm.mixin.Mixins;
 import xyz.mrcraftteammc.grasslauncher.common.CommonConstants;
 import xyz.mrcraftteammc.grasslauncher.common.DefaultExtension;
 import xyz.mrcraftteammc.grasslauncher.extension.annotations.ExtensionInstance;
@@ -89,16 +88,6 @@ public final class ExtensionLoader {
         if (this.extensionList.isEmpty()) {
             logger.warn("No Extensions!");
         }
-
-        logger.info("Pre-Load Extensions Mixin...");
-
-        this.extensionList.forEach(extension -> {
-            if (extension.getMixinConfigs() != null) {
-                Mixins.addConfigurations();
-                return;
-            }
-            logger.warn(String.format("No Mixin found in Extension `%s`.", extension.getId()));
-        });
 
         logger.info("Loading Extensions...");
 
