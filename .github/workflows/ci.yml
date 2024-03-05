@@ -7,12 +7,12 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: write
-  discussions: write
-
 jobs:
   build:
+    permissions:
+      contents: write
+      discussions: write
+
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
@@ -57,9 +57,10 @@ jobs:
           prerelease: true
           files: |
             build/libs/*.jar
+
           tag_name: ${{ steps.prop_info.outputs.release_version }}-${{ env.SHORT_SHA }}
           target_commitish: ${{ github.event.ref }}
-          discussion_category_name: Announcement
+#          discussion_category_name: Announcement
           generate_release_notes: true
           token: ${{ secrets.PUBLISH_TOKEN }}
 
