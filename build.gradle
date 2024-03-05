@@ -16,6 +16,9 @@ targetCompatibility = 1.8
 
 repositories {
     maven {
+        url 'https://maven.fabricmc.net'
+    }
+    maven {
         url 'https://jitpack.io'
     }
     mavenLocal()
@@ -111,7 +114,7 @@ configurations {
 dependencies {
     // Groovy
     //implementation gradleApi()
-    implementation localGroovy()
+    implementation 'org.apache.groovy:groovy-all:4.0.19'
 
     // Annotations
     annotationProcessor(implementation("org.projectlombok:lombok:1.18.30"))
@@ -124,18 +127,15 @@ dependencies {
     implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.23.0"
 
     // Common
-    //implementation "com.google.guava:guava:33.0.0-jre"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.16.1"
-
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.16.1"
-
     implementation "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.1"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1"
 
     implementation "com.squareup.okhttp3:okhttp:4.12.0"
-    //implementation "io.netty:netty-all:4.1.105.Final"
+    implementation "io.netty:netty-all:4.1.105.Final"
     //implementation "commons-codec:commons-codec:1.16.0"
     //implementation "commons-net:commons-net:3.10.0"
     implementation "commons-io:commons-io:2.15.1"
@@ -144,6 +144,11 @@ dependencies {
     //implementation "org.apache.commons:commons-rng-bom:1.5"
     //implementation "org.apache.commons:commons-text:1.11.0"
     implementation "org.apache.commons:commons-lang3:3.14.0"
+
+//    implementation "org.spongepowered:mixin:0.8.5"
+    implementation "net.fabricmc:sponge-mixin:0.13.0+mixin.0.8.5"
+    implementation "com.google.guava:guava:33.0.0-jre"
+    implementation "com.google.code.gson:gson:2.10.1"
 
     // Tests
     annotationProcessor(testImplementation("org.projectlombok:lombok:1.18.30"))

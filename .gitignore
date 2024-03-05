@@ -55,3 +55,4 @@ hs_err_pid*
 /externalgames
 NVIDIA
 minecraft-exported-crash-info*
+.run/Main.run.xml
