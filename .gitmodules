@@ -1,0 +1,3 @@
+[submodule "GrassLauncher.i18n"]
+	path = GrassLauncher.i18n
+	url = https://github.com/MrCraftTeamMC/GrassLauncher.i18n.git
