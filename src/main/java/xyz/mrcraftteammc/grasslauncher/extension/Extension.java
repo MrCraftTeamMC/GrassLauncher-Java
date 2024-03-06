@@ -10,7 +10,7 @@ import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
 @Getter
 @AllArgsConstructor
 public abstract class Extension {
-    private final String id;
+    private final ExtensionManifest manifest;
 
     public abstract void onLoad() throws ExtensionException;
 
@@ -21,7 +21,7 @@ public abstract class Extension {
     }
 
     public Logger getLogger() {
-        return LoggerFactory.getLogger(String.format("GrassLauncher Extension | %s", this.id));
+        return LoggerFactory.getLogger(String.format("GrassLauncher Extension | %s", this.manifest.getId()));
     }
 
     public GrassLauncher getLauncherInstance() {

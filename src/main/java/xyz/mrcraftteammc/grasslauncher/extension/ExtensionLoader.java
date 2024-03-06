@@ -1,6 +1,5 @@
 package xyz.mrcraftteammc.grasslauncher.extension;
 
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.mrcraftteammc.grasslauncher.common.CommonConstants;
@@ -24,64 +23,65 @@ public final class ExtensionLoader {
     private static boolean Initialized = false;
     private final Logger logger = LoggerFactory.getLogger("GrassLauncher Extension Loader");
     private final File file = new File(CommonConstants.EXTENSIONS_DIR);
-    private final YAMLMapper mapper = new YAMLMapper();
-    private List<Extension> extensionList = new ArrayList<>();
+    private final List<Extension> extensionList = new ArrayList<>();
+    private final List<ExtensionManifest> extensionManifestList = new ArrayList<>();
 
     public ExtensionLoader() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         if (!Initialized) {
             Initialized = true;
-            this.extensionList = this.getExtensions();
-        } else {
-            logger.error("Cannot create `ExtensionLoader` instance again!");
-        }
-    }
 
-    public List<Extension> getExtensions() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        if (!file.exists()) throw new IOException("The extension path does not exist.");
+            if (!file.exists()) throw new IOException("The extension path does not exist.");
+            if (!file.isDirectory()) throw new IOException("The extension path is not a directory.");
 
-        if (!file.isDirectory()) throw new IOException("The extension path is not a directory.");
+            List<File> files = new ArrayList<>();
 
-        List<File> files = new ArrayList<>();
-        List<Extension> extensions = new ArrayList<>();
+            this.extensionList.add(new DefaultExtension());
+            this.extensionList.add(new i18nExtension());
 
-        extensions.add(new DefaultExtension());
-        extensions.add(new i18nExtension());
-
-        for (File f : Objects.requireNonNull(file.listFiles())) {
-            if (f.getName().endsWith(".jar")) {
-                files.add(f);
+            for (File f : Objects.requireNonNull(file.listFiles())) {
+                if (f.getName().endsWith(".jar")) {
+                    files.add(f);
+                }
             }
-        }
 
-        for (File f : files) {
-            try (JarFile jar = new JarFile(f)) {
-                Enumeration<JarEntry> entries = jar.entries();
+            for (File f : files) {
+                try (JarFile jar = new JarFile(f)) {
+                    Enumeration<JarEntry> entries = jar.entries();
 
-                while (entries.hasMoreElements()) {
-                    JarEntry entry = entries.nextElement();
+                    while (entries.hasMoreElements()) {
+                        JarEntry entry = entries.nextElement();
 
-                    if (entry.isDirectory() || !entry.getName().endsWith(".class")) {
-                        continue;
-                    }
-                    String clz = entry.getName()
-                            .substring(0, entry.getName().length() - 6)
-                            .replace('/', '.');
-                    URLClassLoader loader =  new URLClassLoader(new URL[]{f.toURI().toURL()},
-                            Thread.currentThread().getContextClassLoader());
-                    Class<?> clazz = loader.loadClass(clz);
+                        if (entry.isDirectory() || !entry.getName().endsWith(".class")) {
+                            continue;
+                        }
 
-                    if (clazz.getAnnotation(ExtensionInstance.class) != null) {
-                        Object o = clazz.newInstance();
+                        String clz = entry.getName()
+                                .substring(0, entry.getName().length() - 6)
+                                .replace('/', '.');
+                        URLClassLoader loader = new URLClassLoader(new URL[]{f.toURI().toURL()},
+                                Thread.currentThread().getContextClassLoader());
+                        Class<?> clazz = loader.loadClass(clz);
 
-                        if (o instanceof Extension) {
-                            extensions.add((Extension) o);
+                        if (clazz.getAnnotation(ExtensionInstance.class) != null) {
+                            Object o = clazz.newInstance();
+
+                            if (o instanceof Extension) {
+                                extensionList.add((Extension) o);
+                                ExtensionManifest manifest = ((Extension) o).getManifest();
+
+                                if (this.extensionManifestList.isEmpty()) {
+                                    this.extensionManifestList.add(manifest);
+                                } else if (!this.extensionManifestList.contains(manifest)) {
+                                    this.extensionManifestList.add(manifest);
+                                }
+                            }
                         }
                     }
                 }
             }
+        } else {
+            logger.error("Cannot create `ExtensionLoader` instance again!");
         }
-
-        return extensions;
     }
 
     public void loadExtensions() {
@@ -92,6 +92,8 @@ public final class ExtensionLoader {
         logger.info("Loading Extensions...");
 
         this.extensionList.forEach(Extension::onLoad);
+
+        this.extensionManifestList.forEach(System.err::println);
     }
 
     public void enableExtensions() {
