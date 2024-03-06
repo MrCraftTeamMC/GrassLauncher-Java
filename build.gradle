@@ -181,6 +181,32 @@ test {
     }
 }
 
+tasks.register("DownloadTranslate") {
+    def langLibs = { Project p ->
+        p.buildDir.toPath().resolve()
+    }
+
+    delete fileTree(langLibs(rootProject)) {
+        include '*'
+    }
+
+    download {
+        src ""
+        dest project.buildDir
+    }
+
+    exec {
+        commandLine ""
+    }
+
+    copy {
+        from ""
+        into ""
+    }
+}
+
+//jar.dependsOn "DownloadTranslate"
+
 jar {
     manifest {
         attributes "Manifest-Version": "1.0"

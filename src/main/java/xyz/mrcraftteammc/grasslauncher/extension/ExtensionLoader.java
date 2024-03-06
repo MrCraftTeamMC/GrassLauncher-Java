@@ -69,11 +69,7 @@ public final class ExtensionLoader {
                                 extensionList.add((Extension) o);
                                 ExtensionManifest manifest = ((Extension) o).getManifest();
 
-                                if (this.extensionManifestList.isEmpty()) {
-                                    this.extensionManifestList.add(manifest);
-                                } else if (!this.extensionManifestList.contains(manifest)) {
-                                    this.extensionManifestList.add(manifest);
-                                }
+                                this.extensionManifestList.add(manifest);
                             }
                         }
                     }

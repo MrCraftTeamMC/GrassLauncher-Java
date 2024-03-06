@@ -2,11 +2,13 @@ package xyz.mrcraftteammc.grasslauncher.extension;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.mrcraftteammc.grasslauncher.common.GrassLauncher;
 import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
 
+@ToString
 @Getter
 @AllArgsConstructor
 public abstract class Extension {
@@ -18,6 +20,9 @@ public abstract class Extension {
     }
 
     public void onDisabled() throws ExtensionException {
+    }
+
+    public void onReload() throws ExtensionException {
     }
 
     public Logger getLogger() {

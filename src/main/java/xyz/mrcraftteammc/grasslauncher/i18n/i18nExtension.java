@@ -6,13 +6,11 @@ import xyz.mrcraftteammc.grasslauncher.extension.ExtensionManifest;
 import xyz.mrcraftteammc.grasslauncher.extension.annotations.ExtensionInstance;
 import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
 
-import java.util.Locale;
-
 @ExtensionInstance
 public class i18nExtension extends Extension {
     private final OkHttpClient client = new OkHttpClient();
     private final String url = "https://github.com/MrCraftTeamMC/GrassLauncher.i18n";
-    private final Locale locale = Locale.getDefault();  // Now support Russian, English. ZH_CN. ZH_TW
+    private final Text text = Text.translatable();
 
     public i18nExtension() {
         super(ExtensionManifest.defaultManifest());
@@ -20,7 +18,13 @@ public class i18nExtension extends Extension {
 
     @Override
     public void onLoad() throws ExtensionException {
-        this.getLogger().info("Hello i18nExtension!");
+        this.getLogger().info("Loading Language files...");
+
+        try {
+            this.getLogger().info(this.text.getText("helloworld"));
+        } catch (Exception e) {
+            this.getLogger().warn("Fail to get Language. Cause: ", e);
+        }
     }
 
     @Override
