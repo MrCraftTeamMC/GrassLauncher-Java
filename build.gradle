@@ -115,7 +115,8 @@ configurations {
 dependencies {
     // Groovy
     //implementation gradleApi()
-    implementation 'org.apache.groovy:groovy-all:4.0.19'
+//    implementation 'org.apache.groovy:groovy-all:4.0.19'
+    implementation localGroovy()
 
     // Annotations
     annotationProcessor(implementation("org.projectlombok:lombok:1.18.30"))
@@ -151,6 +152,9 @@ dependencies {
     shadow "org.ow2.asm:asm-tree:9.6"
     shadow "org.ow2.asm:asm-util:9.6"
 
+    // UI
+    shadow 'com.formdev:flatlaf:3.4'
+
     // Tests
     annotationProcessor(testImplementation("org.projectlombok:lombok:1.18.30"))
     testImplementation platform('org.junit:junit-bom:5.10.2')
@@ -162,10 +166,6 @@ processResources {
 
     filteringCharset "UTF-8"
     filesMatching("config.yml") {
-        expand "version": project.version
-    }
-
-    filesMatching("grasslauncher.extension.yml") {
         expand "version": project.version
     }
 }

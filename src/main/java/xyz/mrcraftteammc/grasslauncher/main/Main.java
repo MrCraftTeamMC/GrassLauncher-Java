@@ -21,5 +21,7 @@ public class Main {
         if (loader != null) {
             loader.loadExtensions();
         }
+
+        GrassLauncherFrame.run();
     }
 }

@@ -1,4 +1,0 @@
-id: "grasslauncher"
-name: "GrassLauncher"
-version: "${version}"
-description: "A Minecraft Server Launcher."

@@ -6,19 +6,23 @@ import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import xyz.mrcraftteammc.grasslauncher.common.GrassLauncher;
+import xyz.mrcraftteammc.grasslauncher.extension.event.ExtensionListener;
 import xyz.mrcraftteammc.grasslauncher.extension.exception.ExtensionException;
 
 @ToString
 @Getter
 @AllArgsConstructor
-public abstract class Extension {
+public abstract class Extension implements ExtensionListener {
     private final ExtensionManifest manifest;
 
+    @Override
     public abstract void onLoad() throws ExtensionException;
 
+    @Override
     public void onEnabled() throws ExtensionException {
     }
 
+    @Override
     public void onDisabled() throws ExtensionException {
     }
 

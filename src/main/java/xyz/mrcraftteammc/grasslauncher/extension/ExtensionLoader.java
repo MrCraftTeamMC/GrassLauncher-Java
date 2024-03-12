@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import xyz.mrcraftteammc.grasslauncher.common.CommonConstants;
 import xyz.mrcraftteammc.grasslauncher.common.DefaultExtension;
 import xyz.mrcraftteammc.grasslauncher.extension.annotations.ExtensionInstance;
-import xyz.mrcraftteammc.grasslauncher.i18n.i18nExtension;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +35,6 @@ public final class ExtensionLoader {
             List<File> files = new ArrayList<>();
 
             this.extensionList.add(new DefaultExtension());
-            this.extensionList.add(new i18nExtension());
 
             for (File f : Objects.requireNonNull(file.listFiles())) {
                 if (f.getName().endsWith(".jar")) {

@@ -2,6 +2,7 @@ package xyz.mrcraftteammc.grasslauncher.common.core;
 
 import lombok.Getter;
 
+@Deprecated
 @Getter
 public class ProcessCallBack {
     private final int exitCode;
