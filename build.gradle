@@ -131,7 +131,7 @@ dependencies {
     shadow "com.fasterxml.jackson.core:jackson-databind:2.16.2"
     shadow "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.1"
     shadow "com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.16.1"
-    shadow "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1"
+    shadow "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.2"
     shadow "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.2"
     shadow "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.2"
 
