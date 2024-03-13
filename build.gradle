@@ -129,7 +129,7 @@ dependencies {
     shadow "org.apache.logging.log4j:log4j-slf4j-impl:2.23.1"
 
     // Common
-    shadow "com.fasterxml.jackson.core:jackson-databind:2.16.2"
+    shadow "com.fasterxml.jackson.core:jackson-databind:2.17.0"
     shadow "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.2"
     shadow "com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.16.2"
     shadow "com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.2"
