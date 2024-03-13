@@ -147,7 +147,7 @@ dependencies {
     //shadow "org.apache.commons:commons-text:1.11.0"
     shadow "org.apache.commons:commons-lang3:3.14.0"
 
-    shadow "com.google.guava:guava:33.0.0-jre"
+    shadow "com.google.guava:guava:33.1.0-jre"
     shadow "org.ow2.asm:asm-commons:9.6"
     shadow "org.ow2.asm:asm-tree:9.6"
     shadow "org.ow2.asm:asm-util:9.6"
