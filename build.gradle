@@ -119,7 +119,7 @@ dependencies {
     implementation localGroovy()
 
     // Annotations
-    annotationProcessor(implementation("org.projectlombok:lombok:1.18.30"))
+    annotationProcessor(implementation("org.projectlombok:lombok:1.18.32"))
     implementation 'org.jetbrains:annotations:24.1.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
@@ -156,7 +156,7 @@ dependencies {
     shadow 'com.formdev:flatlaf:3.4'
 
     // Tests
-    annotationProcessor(testImplementation("org.projectlombok:lombok:1.18.30"))
+    annotationProcessor(testImplementation("org.projectlombok:lombok:1.18.32"))
     testImplementation platform('org.junit:junit-bom:5.10.2')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
