@@ -137,7 +137,7 @@ dependencies {
     shadow "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.2"
 
     shadow "com.squareup.okhttp3:okhttp:4.12.0"
-    shadow "io.netty:netty-all:4.1.107.Final"
+    shadow "io.netty:netty-all:4.1.108.Final"
     //shadow "commons-codec:commons-codec:1.16.0"
     //shadow "commons-net:commons-net:3.10.0"
     shadow "commons-io:commons-io:2.15.1"
